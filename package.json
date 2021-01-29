@@ -1,0 +1,16 @@
+{
+  "name": "full-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "lerna run --parallel dev"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

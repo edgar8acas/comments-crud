@@ -1,0 +1,14 @@
+[
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "postgres",
+    "database": "full-stack",
+    "entities": ["entities/**/*.ts"],
+    "synchronize": true,
+    "logging": true
+  }
+]
