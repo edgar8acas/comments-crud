@@ -13,7 +13,7 @@ app.use(express.json());
 app.use("/api", router);
 
 (async function setup() {
-  const connection = await createConnection();
+  await createConnection();
 })();
 
 const PORT = process.env.SERVER_PORT;

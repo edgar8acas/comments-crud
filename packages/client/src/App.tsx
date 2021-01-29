@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { CommentInterface } from "./features/comments/Comment";
 import { CommentList } from "./features/comments/CommentList";
 import { CreateComment } from "./features/comments/CreateComment";
 
 function App() {
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<CommentInterface[]>([]);
 
   useEffect(() => {
     const getComments = async () => {
@@ -19,9 +20,13 @@ function App() {
     getComments();
   }, []);
 
+  const handleCreatedComment = (data: any) => {
+    setComments([...comments, data.comment]);
+  };
+
   return (
     <div className="App">
-      <CreateComment />
+      <CreateComment onCommentCreated={handleCreatedComment} />
       <CommentList comments={comments}></CommentList>
     </div>
   );

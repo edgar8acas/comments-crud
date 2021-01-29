@@ -6,11 +6,14 @@ const CommentController: Router = Router();
 
 CommentController.post("/", async (req, res, next) => {
   const { body } = req;
-
   const entityManager = getManager();
   const created = entityManager.create(Comment, body);
-  const saved = await entityManager.save(created);
-  return res.status(200).json({ saved });
+  try {
+    const comment = await entityManager.save(created);
+    return res.json({ comment });
+  } catch (error) {
+    return next(error);
+  }
 });
 
 CommentController.get("/", async (req, res, next) => {
