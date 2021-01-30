@@ -21,13 +21,15 @@ function App() {
   }, []);
 
   const handleCreatedComment = (data: any) => {
-    setComments([...comments, data.comment]);
+    setComments([data.comment, ...comments]);
   };
 
   return (
     <div className="App">
-      <CreateComment onCommentCreated={handleCreatedComment} />
-      <CommentList comments={comments}></CommentList>
+      <div className="Comments">
+        <CreateComment onCommentCreated={handleCreatedComment} />
+        <CommentList comments={comments}></CommentList>
+      </div>
     </div>
   );
 }

@@ -15,8 +15,12 @@ export interface CommentProps {
 export const Comment: React.FC<CommentProps> = ({ comment }) => {
   return (
     <div className="Comment">
-      <h3>{comment.author}</h3>
+      <h4>{comment.author}</h4>
       <p>{comment.description}</p>
+      <div className="Comment-actions">
+        <button>Edit</button>
+        <button>Delete</button>
+      </div>
     </div>
   );
 };

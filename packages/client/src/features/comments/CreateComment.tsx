@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CommentInterface } from "./Comment";
+import "./CreateComment.css";
 
 export interface CreateCommentProps {
   onCommentCreated?: (comment: any) => void;
@@ -39,14 +40,15 @@ export const CreateComment: React.FC<CreateCommentProps> = ({
 
   return (
     <div className="CreateComment">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="CreateComment-form">
         <label htmlFor="description">Description</label>
         <textarea
           value={comment.description}
+          rows={5}
           onChange={handleChange}
           name="description"
         />
-        <button>Create</button>
+        <button className="CreateComment-create">Create</button>
       </form>
     </div>
   );

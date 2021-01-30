@@ -1,5 +1,14 @@
 .App {
-  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Comments {
+  min-width: 600px;
+  align-self: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {

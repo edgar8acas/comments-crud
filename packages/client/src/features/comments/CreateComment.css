@@ -1,0 +1,8 @@
+.CreateComment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.CreateComment-create {
+  align-self: flex-end;
+}
