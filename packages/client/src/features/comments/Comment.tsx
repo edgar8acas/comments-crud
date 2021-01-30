@@ -1,3 +1,5 @@
+import * as React from "react";
+import "./Comment.css";
 export interface CommentInterface {
   id: number;
   description: string;
@@ -12,7 +14,7 @@ export interface CommentProps {
 
 export const Comment: React.FC<CommentProps> = ({ comment }) => {
   return (
-    <div style={{}}>
+    <div className="Comment">
       <h3>{comment.author}</h3>
       <p>{comment.description}</p>
     </div>
