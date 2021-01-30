@@ -26,6 +26,7 @@ export const CreateComment: React.FC<CreateCommentProps> = ({
         return res.ok ? res.json() : {};
       })
       .then((data) => {
+        setComment({ description: "" });
         if (onCommentCreated !== undefined) onCommentCreated(data);
       })
       .catch((error) => {
@@ -41,7 +42,7 @@ export const CreateComment: React.FC<CreateCommentProps> = ({
   return (
     <div className="CreateComment">
       <form onSubmit={handleSubmit} className="CreateComment-form">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Comment</label>
         <textarea
           value={comment.description}
           rows={5}
