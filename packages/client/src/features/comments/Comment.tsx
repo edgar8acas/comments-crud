@@ -1,5 +1,6 @@
 import * as React from "react";
 import "./Comment.css";
+import { EditComment } from "./EditComment";
 export interface CommentInterface {
   id: number;
   description: string;
@@ -28,12 +29,11 @@ export const Comment: React.FC<CommentProps> = ({ comment }) => {
       </>
     );
   } else {
-    commentDescription = <textarea value={comment.description}></textarea>;
-    commentActions = (
-      <>
-        <button onClick={() => setMode("read")}>Cancel</button>
-        <button>Save</button>
-      </>
+    commentDescription = (
+      <EditComment
+        commentToEdit={comment}
+        onCancelEdition={() => setMode("read")}
+      />
     );
   }
 
