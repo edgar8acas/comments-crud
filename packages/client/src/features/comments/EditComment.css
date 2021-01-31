@@ -1,4 +1,6 @@
-.EditComment {
+.EditComment textarea {
+  width: 100%;
+  resize: vertical;
 }
 
 .EditComment-actions {

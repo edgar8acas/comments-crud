@@ -6,7 +6,11 @@
 }
 
 .Comment h4 {
-  margin: 0;
+  margin: 0 0 0.5rem 0;
+}
+
+.Comment-description {
+  margin-top: 0;
 }
 
 .Comment-actions button {

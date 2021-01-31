@@ -45,7 +45,7 @@ export const Comment: React.FC<CommentProps> = ({
   let commentBody;
   let commentActions;
   if (mode === "read") {
-    commentBody = <p>{comment.description}</p>;
+    commentBody = <p className="Comment-description">{comment.description}</p>;
     commentActions = (
       <>
         <button onClick={() => setMode("edit")}>Edit</button>

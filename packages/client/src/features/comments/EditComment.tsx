@@ -49,7 +49,7 @@ export const EditComment: React.FC<EditCommentProps> = ({
       <form onSubmit={handleSubmit} className="EditComment-form">
         <textarea
           value={comment.description}
-          rows={5}
+          rows={2}
           onChange={handleChange}
           name="description"
         />
