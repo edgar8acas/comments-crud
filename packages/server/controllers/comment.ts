@@ -40,4 +40,15 @@ CommentController.put("/:id", async (req, res, next) => {
   }
 });
 
+CommentController.delete("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const entityManager = getManager();
+  try {
+    const result = await entityManager.delete(Comment, id);
+    return res.json({ result });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 export default CommentController;
