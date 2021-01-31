@@ -13,7 +13,12 @@ export const CommentList: React.FC<CommentListProps> = ({
 }) => {
   return (
     <div className="CommentList">
-      {comments.map((comment) => renderedComment(comment))}
+      {comments
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        .map((comment) => renderedComment(comment))}
     </div>
   );
 };
