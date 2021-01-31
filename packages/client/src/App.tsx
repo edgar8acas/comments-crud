@@ -31,6 +31,13 @@ function App() {
     setComments(updatedComments);
   };
 
+  const handleCommentDelated = (deleted: CommentInterface) => {
+    const updatedComments = [...comments];
+    const index = comments.findIndex((comment) => comment.id === deleted.id);
+    updatedComments.splice(index, 1);
+    setComments(updatedComments);
+  };
+
   return (
     <div className="App">
       <div className="Comments">
@@ -42,6 +49,7 @@ function App() {
               comment={comment}
               key={comment.id}
               onCommentEditted={handleCommentEditted}
+              onCommentDelated={handleCommentDelated}
             />
           )}
         ></CommentList>

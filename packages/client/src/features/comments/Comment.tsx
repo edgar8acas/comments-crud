@@ -12,6 +12,7 @@ export interface CommentInterface {
 export interface CommentProps {
   comment: CommentInterface;
   onCommentEditted: (comment: CommentInterface) => void;
+  onCommentDelated: (comment: CommentInterface) => void;
 }
 
 type Mode = "read" | "edit";
@@ -19,21 +20,40 @@ type Mode = "read" | "edit";
 export const Comment: React.FC<CommentProps> = ({
   comment,
   onCommentEditted,
+  onCommentDelated,
 }) => {
   const [mode, setMode] = React.useState<Mode>("read");
 
-  let commentDescription;
+  const deleteComment = () => {
+    fetch(`http://localhost:5000/api/comments/${comment.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then((res) => {
+        return res.ok ? res.json() : null;
+      })
+      .then((data) => {
+        onCommentDelated(comment);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  let commentBody;
   let commentActions;
   if (mode === "read") {
-    commentDescription = <p>{comment.description}</p>;
+    commentBody = <p>{comment.description}</p>;
     commentActions = (
       <>
         <button onClick={() => setMode("edit")}>Edit</button>
-        <button>Delete</button>
+        <button onClick={deleteComment}>Delete</button>
       </>
     );
   } else {
-    commentDescription = (
+    commentBody = (
       <EditComment
         commentToEdit={comment}
         onCommentEditted={onCommentEditted}
@@ -45,7 +65,7 @@ export const Comment: React.FC<CommentProps> = ({
   return (
     <div className="Comment">
       <h4>{comment.author}</h4>
-      {commentDescription}
+      {commentBody}
       <div className="Comment-actions">{commentActions}</div>
     </div>
   );
