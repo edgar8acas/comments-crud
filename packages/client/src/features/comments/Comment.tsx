@@ -11,11 +11,15 @@ export interface CommentInterface {
 
 export interface CommentProps {
   comment: CommentInterface;
+  onCommentEditted: (comment: CommentInterface) => void;
 }
 
 type Mode = "read" | "edit";
 
-export const Comment: React.FC<CommentProps> = ({ comment }) => {
+export const Comment: React.FC<CommentProps> = ({
+  comment,
+  onCommentEditted,
+}) => {
   const [mode, setMode] = React.useState<Mode>("read");
 
   let commentDescription;
@@ -32,7 +36,8 @@ export const Comment: React.FC<CommentProps> = ({ comment }) => {
     commentDescription = (
       <EditComment
         commentToEdit={comment}
-        onCancelEdition={() => setMode("read")}
+        onCommentEditted={onCommentEditted}
+        onCloseEdition={() => setMode("read")}
       />
     );
   }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { CommentInterface } from "./features/comments/Comment";
+import { CommentInterface, Comment } from "./features/comments/Comment";
 import { CommentList } from "./features/comments/CommentList";
 import { CreateComment } from "./features/comments/CreateComment";
 
@@ -20,15 +20,31 @@ function App() {
     getComments();
   }, []);
 
-  const handleCreatedComment = (data: any) => {
+  const handleCommentCreated = (data: any) => {
     setComments([data.comment, ...comments]);
+  };
+
+  const handleCommentEditted = (edited: CommentInterface) => {
+    const index = comments.findIndex((comment) => comment.id === edited.id);
+    const updatedComments = [...comments];
+    updatedComments[index] = edited;
+    setComments(updatedComments);
   };
 
   return (
     <div className="App">
       <div className="Comments">
-        <CreateComment onCommentCreated={handleCreatedComment} />
-        <CommentList comments={comments}></CommentList>
+        <CreateComment onCommentCreated={handleCommentCreated} />
+        <CommentList
+          comments={comments}
+          renderedComment={(comment) => (
+            <Comment
+              comment={comment}
+              key={comment.id}
+              onCommentEditted={handleCommentEditted}
+            />
+          )}
+        ></CommentList>
       </div>
     </div>
   );

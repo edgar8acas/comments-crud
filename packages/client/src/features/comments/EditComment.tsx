@@ -3,14 +3,14 @@ import { CommentInterface } from "./Comment";
 import "./EditComment.css";
 
 export interface EditCommentProps {
-  onCommentEditted?: (comment: any) => void;
-  onCancelEdition?: () => void;
+  onCommentEditted: (comment: CommentInterface) => void;
+  onCloseEdition: () => void;
   commentToEdit: CommentInterface;
 }
 
 export const EditComment: React.FC<EditCommentProps> = ({
   onCommentEditted,
-  onCancelEdition,
+  onCloseEdition,
   commentToEdit,
 }) => {
   const [comment, setComment] = React.useState<CommentInterface | any>(
@@ -19,7 +19,7 @@ export const EditComment: React.FC<EditCommentProps> = ({
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/comments", {
+    fetch(`http://localhost:5000/api/comments/${commentToEdit.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -27,11 +27,12 @@ export const EditComment: React.FC<EditCommentProps> = ({
       body: JSON.stringify(comment),
     })
       .then((res) => {
-        return res.ok ? res.json() : {};
+        return res.ok ? res.json() : null;
       })
       .then((data) => {
         setComment({ description: "" });
-        if (onCommentEditted !== undefined) onCommentEditted(data);
+        onCommentEditted(data.comment as CommentInterface);
+        onCloseEdition();
       })
       .catch((error) => {
         console.log(error);
@@ -53,7 +54,7 @@ export const EditComment: React.FC<EditCommentProps> = ({
           name="description"
         />
         <div className="Comment-actions">
-          <button type="button" onClick={onCancelEdition}>
+          <button type="button" onClick={onCloseEdition}>
             Cancel
           </button>
           <button>Save</button>
